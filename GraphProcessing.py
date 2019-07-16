@@ -3,7 +3,6 @@ import codecs
 
 def processList(G, out_file, length):
     ct=0
-    out_file='graph2.txt'
     while ct<length:
         tempDict={}
         for i in G[0]:
@@ -62,14 +61,12 @@ def getMultipleLists(graph_file,ids_file):
     # print(len(weight))
     return [ids,docids,offset,neighbors,weight]
 
+with open("./graph.txt", "rb") as fp:   # Unpickling
+    G = pickle.load(fp)
+processList(G, 'graph1.txt', 2784203)
+ids,docids,offset,neighbors,weight = getMultipleLists('./graph1.txt','./uniqueIDs.txt')
 
-def main():
-    with open("./graph.txt", "rb") as fp:   # Unpickling
-        G = pickle.load(fp)
-    processList(G, 'graph1.txt', 2784203)
-    ids,docids,offset,neighbors,weight = getMultipleLists('./graph1.txt','./uniqueIDs.txt')
-
-    with open('model_file1.txt','w') as fw:
+with open('model_file1.txt','w') as fw:
     for i in docids:
         fw.write(str(i) + '\t')
     fw.write('\n')

@@ -103,11 +103,11 @@ def processDoc(G,in_file,firstUser,articleDict):
 #                 G[L[j]].append([L[i],1])
 
 # # Array representation
-# def addNodes(G,L):
-#     for i in range(len(L)): # for all nodes
-#         for j in range(i+1,len(L)):
-#             G[L[i]].append(L[j])
-#             G[L[j]].append(L[i])
+def addNodes(G,L):
+    for i in range(len(L)): # for all nodes
+        for j in range(i+1,len(L)):
+            G[L[i]].append(L[j])
+            G[L[j]].append(L[i])
 
 
 # # Graph representation
@@ -130,7 +130,6 @@ def processDoc(G,in_file,firstUser,articleDict):
 #                     G.add_edge(L[i],L[j])
 #     return G
 
-def main():
 # #   graph representation
 #     G=nx.Graph()
 
@@ -138,14 +137,14 @@ def main():
 #     G = [{} for x in range(2784203)]
 
 #   list of list representation
-    G = [[] for x in range(2784203)]
+G = [[] for x in range(2784203)]
 
-    in_file='./uniqueIDs.txt'
-    articleDict=createDic(in_file)
+in_file='./uniqueIDs.txt'
+articleDict=createDic(in_file)
     
-    in_file = './train_clks.txt'
-    processDoc(G,in_file,'10000225', articleDict)
+in_file = './train_clks1.txt'
+processDoc(G,in_file,'10000225', articleDict)
 
-    import pickle
-    with open("graph.txt", "wb") as fp:   #Pickling
-        pickle.dump(G, fp)
+import pickle
+with open("graph.txt", "wb") as fp:   #Pickling
+    pickle.dump(G, fp)

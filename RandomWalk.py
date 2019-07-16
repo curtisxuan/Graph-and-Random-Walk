@@ -78,20 +78,20 @@ def randomWalk(Node,N,walkLen,offset,neighbors,weight,mapping):
         totSteps += walkLen
     return V
 
-def main():
-    ids,docids,offset,neighbors,weight = getMultipleLists('./graph1.txt','./uniqueIDs.txt')
 
-    s = sorted(ids,key=int)
-    mapping={}
-    ct=0
-    for i in s:
-        mapping[i]=ct
-        ct+=1
+ids,docids,offset,neighbors,weight = getMultipleLists('./graph1.txt','./uniqueIDs.txt')
 
-    # randomWalk(Node,N,walkLen,offset,neighbors,weight,mapping)
-    test = randomWalk(0,10,3,offset,neighbors,weight,mapping)
-    print(test)
+s = sorted(ids,key=int)
+mapping={}
+ct=0
+for i in s:
+    mapping[str(i)]=ct
+    ct+=1
 
-    # print(docids[0])
-    # print(docids[415662])
+# randomWalk(Node,N,walkLen,offset,neighbors,weight,mapping)
+test = randomWalk(0,10,3,offset,neighbors,weight,mapping)
+print(test)
+
+# print(docids[0])
+# print(docids[415662])
 
