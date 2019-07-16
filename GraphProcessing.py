@@ -66,18 +66,19 @@ with open("./graph.txt", "rb") as fp:   # Unpickling
 processList(G, 'graph1.txt', 2784203)
 ids,docids,offset,neighbors,weight = getMultipleLists('./graph1.txt','./uniqueIDs.txt')
 
-with open('model_file1.txt','w') as fw:
-    for i in docids:
-        fw.write(str(i) + '\t')
-    fw.write('\n')
-    for i in ids:
-        fw.write(str(i) + '\t')
-    fw.write('\n')
-    for i in offset:
-        fw.write(str(i) + '\t')
-    fw.write('\n')
-    for i in neighbors:
-        fw.write(str(i) + '\t')
-    fw.write('\n')
-    for i in weight:
-        fw.write(str(i) + '\t')
+#create mapping for new graph docids
+s = sorted(ids,key=int)
+mapping={}
+ct=0
+for i in s:
+    mapping[str(i)]=ct
+    ct+=1
+
+#create final graph (4 list representation)
+with open('doc-offset.txt','w') as fw:
+    for i in range(len(docids)):
+        fw.write(str(docids[i]) + '\t' + str(offset[i]) + '\n')
+with open('neighbor-weight.txt','w') as fw:
+    for i in range(len(neighbors)):
+        fw.write(str(mapping[neighbors[i]]) + '\t' + str(weight[i]) + '\n')
+
